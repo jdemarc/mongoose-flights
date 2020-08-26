@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title><%= title %></title>
+</head>
+<body>
+  <nav>
+    <img src='/images/airplane.png'>
+    <a href="/flights" <%- title === 'Manage Flights' ? 'class="active"' : '' %>>MANAGE FLIGHTS</a>
+    <a href="/flights/new" <%- title === 'Add Flights' ? 'class="active"' : '' %>>ADD FLIGHT</a>
+  </nav>
+  <main>

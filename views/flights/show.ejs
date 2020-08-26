@@ -1,0 +1,80 @@
+<%- include('../partials/header') %>
+
+  <h1> Flight Details </h1>
+
+    <section id="show-page">
+      <div class="flight-details">
+        <p><span>Flight Number</span></p><p><%= flight.flightNo %></p>
+        <p><span>Airline</span></p><p><%= flight.airline %></p>
+        <p><span>Airport</span></p><p><%= flight.airport %></p>
+        <p><span>Departure</span></p><p><%= flight.departs.toLocaleString(); %></p>
+      </div>
+
+        <div class='flex-ctr'><span>Ticket(s)</span> 
+        <% if (attachedTickets.length) { %>
+          <select>
+            <% attachedTickets.forEach(function (t) { %>
+            <option value="<%= t.seat %>"><%= t.seat %></option>
+            <% }); %>
+          </select>
+              
+        <% } else { %>
+          <h5>No tickets have been attached.</h5>
+        <% } %>
+        </div>
+      </section>
+  
+    <a href="/flights/<%= flight._id %>/tickets/new"><br>CREATE TICKET</a>
+
+    
+    <br><br><h2>Destinations</h2>
+    <% if (allowedDestinations.length) { %>
+      <form id="add-destination-form" method="POST"
+      action="/flights/<%= flight._id %>/destinations">
+      <label>Destination </label>
+      <select name="airport">
+      <% allowedDestinations.forEach(function(d) { %>
+          <option value="<%= d %>"><%= d %></option>
+          <% }); %>
+        </select>
+      <label> Arrival Date</label>
+      <input type="datetime-local" class='input-ctr' name="arrival" value="" autocomplete="off">
+
+      <button type="submit"> Add Destination</button>
+      </form>
+    <% } else { %>
+      <h5>No additional destinations may be added</h5>
+    <% } %>
+
+    <% if (flight.destinations.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Airport</th>
+              <th>Arrival</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight.destinations.forEach(function(d) { %>
+              <tr>
+                <td><%= d.airport %></td>
+                <td><%= d.arrival.toLocaleString() %></td>
+                <td>
+                    <form id="delete-destination" 
+                    action="/destinations/<%= d.id %>?_method=DELETE" method="POST">
+                    <button type="submit">X</button>
+                  </form>
+                </td>
+            </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <h5>No destinations yet</h5>
+      <% } %>
+
+      <form id="delete-all-tickets" 
+      action="/flights/<%= flight._id%>/tickets?_method=DELETE" method="POST">
+      <button type="submit">Delete all Tickets</button>
+
+<%- include('../partials/footer') %>

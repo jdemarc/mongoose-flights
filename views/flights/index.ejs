@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+  <h1>Flight List</h1>
+
+  <% if (flights.length) { %>
+    <% flights.forEach(function(f) { %>
+      <% if (f.departs < Date.now()) { %> 
+        <div class='expired'> 
+          <% } else { %>
+            <div class='valid'>
+              <% } %>
+              <div class='flight-details'>
+                <p><span>Flight Number</span></p><p><%= f.flightNo %></p>
+                <p><span>Airline</span></p><p><%= f.airline %></p>
+                <p><span>Airport</span></p><p><%= f.airport %></p>
+                <p><span>Departure</span></p><p><%= f.departs.toLocaleString(); %></p>
+                <p><a href="/flights/<%= f._id %>">DETAILS</a></p>
+                <form id="delete-flight" action="/flights/<%= f.id %>?_method=DELETE" method="POST">
+                  <div id='delete-btn'>
+                <button type="submit">DELETE</button></div>
+                </form>
+            </div>
+        </div>
+      <% }); %>
+      <% } else { %>
+        <h5>No flights have been added.</h5>
+      <% } %>
+
+  <%- include('../partials/footer') %>

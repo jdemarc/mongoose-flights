@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function newDest(req, res) {
-    Flight.findById(req.params.id, function(err, flight) {
+    Flight.findById(req.params.id, function (err, flight) {
         //Retrieve all possible flight destinations
         destinationEnums = flight.schema.path('destinations.airport').enumValues;
 

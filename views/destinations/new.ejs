@@ -13,10 +13,11 @@
                 <div class="col-sm">
                     <form action="/flights/<%= flight._id %>/destinations" method="POST">
                         <select name="airport">
-                        <% allowedDestinations.forEach(function(d) { %>
+                        <% allowedDestinations.forEach(function (d) { %>
                             <option value="<%= d %>"><%= d %></option>
                             <% }); %>
                         </select>
+                    </form>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -38,10 +39,10 @@
                 </div>
               <% } %>
               <div class="row justify-content-center">
-                  <form action="/flights/<%= flight._id= %>" method="GET">
-                  <button type="submit" class="btn btn-primary">RETURN</button>
-                  </form>
-              </div>
+                <form action="/flights/<%= flight._id %>" method="GET">
+                    <button type="submit" class="btn btn-primary">RETURN</button>
+                </form>
+            </div>
         </div>
-
+        
 <%- include('../partials/footer') %>

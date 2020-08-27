@@ -1,6 +1,26 @@
 <%- include('../partials/header') %>
 
-  <h1>Flight List</h1>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h1>Flight List</h1>
+  </div>
+
+  <div class="row text-center border-bottom">
+    <div class="col-sm">
+      Airline
+    </div>
+    <div class="col-sm">
+      Airport
+    </div>
+    <div class="col-sm">
+      Flight Number
+    </div>
+    <div class="col-sm">
+      Departure
+    </div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+  </div>
 
   <% if (flights.length) { %>
     <% flights.forEach(function(f) { %>
@@ -9,21 +29,32 @@
           <% } else { %>
             <div class='valid'>
               <% } %>
-              <div class='flight-details'>
-                <p><span>Flight Number</span></p><p><%= f.flightNo %></p>
-                <p><span>Airline</span></p><p><%= f.airline %></p>
-                <p><span>Airport</span></p><p><%= f.airport %></p>
-                <p><span>Departure</span></p><p><%= f.departs.toLocaleString(); %></p>
-                <p><a href="/flights/<%= f._id %>">DETAILS</a></p>
-                <form id="delete-flight" action="/flights/<%= f.id %>?_method=DELETE" method="POST">
-                  <div id='delete-btn'>
-                <button type="submit">DELETE</button></div>
+              <div class="row text-center">
+                <div class="col-sm">
+                  <%= f.airline %>
+                </div>
+                <div class="col-sm">
+                  <%= f.airport %>
+                </div>
+                <div class="col-sm">
+                  <%= f.flightNo %>
+                </div>
+                <div class="col-sm">
+                  <%= f.departs.toLocaleString(); %>
+                </div>
+                <div class="col-sm">
+                  <a href="/flights/<%= f._id %>">DETAILS</a>
+                </div>
+                <div class="col-sm">
+                  <form id="delete-flight" action="/flights/<%= f.id %>?_method=DELETE" method="POST">
+                  <button type="submit">DELETE</button>
                 </form>
-            </div>
-        </div>
-      <% }); %>
-      <% } else { %>
-        <h5>No flights have been added.</h5>
-      <% } %>
-
+                </div>
+              </div>
+            <% }); %>
+          </div>
+    <% } else { %>
+      h5>No flights have been added.</h5>
+    <% } %>
+  </div>
   <%- include('../partials/footer') %>

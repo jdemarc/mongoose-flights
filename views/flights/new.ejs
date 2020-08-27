@@ -1,29 +1,62 @@
 <%- include('../partials/header') %>
 
-    <h2>Enter a New Flight</h2>
-    <form action="/flights" method="POST">
-      <div class=create-flight>
-      <p>Airline</p>
-        <select name="airline">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <h2>Enter a New Flight</h2>
+    </div>
+
+    <div class="row justify-content-md-space-between"> 
+      <div class="col-sm text-right font-weight-bold">
+        Airline
+      </div>
+      <div class="col-sm">
+        <form action="/flights" method="POST">
+          <select name="airline">
             <option value="American">American</option>
             <option value="Delta">Delta</option>
             <option value="Southwest">Southwest</option>
             <option value="United">United</option>
           </select>
-      <p>Airport</p>
-        <select name="airport">
+      </div>
+    </div>
+  
+      <div class="row">
+        <div class="col-sm text-right font-weight-bold">
+          Airport
+        </div>
+        <div class="col-sm">
+          <select name="airport">
             <option value="ATL">ATL</option>
             <option value="DFW">DFW</option>
             <option value="DEN" selected>DEN</option>
             <option value="LAX">LAX</option>
             <option value="SAN">SAN</option>
           </select>
-      <p>Flight Number </p>
-        <input type="text" class="input-ctr" name="flightNo" autocomplete="off">
-      <p>Departure </p>
-        <input type="datetime-local" name="departs" value="<%= departsDate %>" autocomplete="off">
-        <p></p><button type="submit">Add Flight</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm text-right font-weight-bold">
+          Flight Number
+        </div>
+        <div class="col-sm">
+          <input type="text" name="flightNo" autocomplete="off" placeholder="10 to 9999">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm text-right font-weight-bold">
+          Departure Date
+        </div>
+        <div class="col-sm">
+          <input type="datetime-local" name="departs" value="<%= departsDate %>" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <button type="submit" class="btn btn-primary">ADD FLIGHT</button>
       </div>
     </form>
+  </div>
 
 <%- include('../partials/footer') %>

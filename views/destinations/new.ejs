@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <h4>Add Destination</h4>
+        </div>
+
+        <% if (allowedDestinations.length) { %>
+            <div class="row justify-content-center">
+                <div class="col-sm font-weight-bold text-right">
+                    Airport
+                </div>
+                <div class="col-sm">
+                    <form action="/flights/<%= flight._id %>/destinations" method="POST">
+                        <select name="airport">
+                        <% allowedDestinations.forEach(function(d) { %>
+                            <option value="<%= d %>"><%= d %></option>
+                            <% }); %>
+                        </select>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm font-weight-bold text-right">
+                    Arrival
+                </div>                
+                <div class="col-sm">
+                    <input type="datetime-local" name="arrival" value="" autocomplete="off">
+                </div>
+            </div>
+          
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary"> Add Destination</button>
+                </form>
+            </div>
+              <% } else { %>
+                <div class="row justify-content-center">
+                    <h5>No additional destinations may be added</h5>
+                </div>
+              <% } %>
+              <div class="row justify-content-center">
+                  <form action="/flights/<%= flight._id %>" method="GET">
+                  <button type="submit" class="btn btn-primary">RETURN</button>
+                  </form>
+              </div>
+        </div>
+
+<%- include('../partials/footer') %>

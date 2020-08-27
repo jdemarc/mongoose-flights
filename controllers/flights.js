@@ -59,8 +59,8 @@ function show(req, res) {
             Ticket.find({ flight: flight._id} , function (err, attachedTickets) {
             //     console.log(attachedTickets);
 
-                res.render('flights/show', { flight, title: 'Flight Details',
-                                            allowedDestinations, createdTickets, attachedTickets });
+                res.render('flights/show', { flight, title: 'Flight Details', 
+                                            createdTickets, attachedTickets });
             });
             
         });

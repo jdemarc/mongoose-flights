@@ -1,80 +1,108 @@
 <%- include('../partials/header') %>
 
-  <h1> Flight Details </h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <h1> Flight Details </h1>
+  </div>
 
-    <section id="show-page">
-      <div class="flight-details">
-        <p><span>Flight Number</span></p><p><%= flight.flightNo %></p>
-        <p><span>Airline</span></p><p><%= flight.airline %></p>
-        <p><span>Airport</span></p><p><%= flight.airport %></p>
-        <p><span>Departure</span></p><p><%= flight.departs.toLocaleString(); %></p>
+  <div class="row">
+    <div class="col-sm font-weight-bold text-right">
+      Flight Number
+    </div>
+    <div class="col-sm">
+      <%= flight.flightNo %>
+    </div>
+  </div>
+  <div class="row">
+     <div class="col-sm font-weight-bold text-right">
+       Airline
+     </div>
+     <div class="col-sm">
+       <%= flight.airline %>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-sm font-weight-bold text-right">
+        Airport
+     </div>
+      <div class="col-sm">
+        <%= flight.airport %>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-sm font-weight-bold text-right">
+        Departure Date
+      </div>
+      <div class="col-sm">
+        <%= flight.departs %>
+      </div>
+    </div>
 
-        <div class='flex-ctr'><span>Ticket(s)</span> 
-        <% if (attachedTickets.length) { %>
-          <select>
-            <% attachedTickets.forEach(function (t) { %>
-            <option value="<%= t.seat %>"><%= t.seat %></option>
-            <% }); %>
-          </select>
-              
-        <% } else { %>
-          <h5>No tickets have been attached.</h5>
-        <% } %>
-        </div>
-      </section>
-  
-    <a href="/flights/<%= flight._id %>/tickets/new"><br>CREATE TICKET</a>
-
-    
-    <br><br><h2>Destinations</h2>
-    <% if (allowedDestinations.length) { %>
-      <form id="add-destination-form" method="POST"
-      action="/flights/<%= flight._id %>/destinations">
-      <label>Destination </label>
-      <select name="airport">
-      <% allowedDestinations.forEach(function(d) { %>
-          <option value="<%= d %>"><%= d %></option>
-          <% }); %>
-        </select>
-      <label> Arrival Date</label>
-      <input type="datetime-local" class='input-ctr' name="arrival" value="" autocomplete="off">
-
-      <button type="submit"> Add Destination</button>
-      </form>
+  <div class="row font-weight-bold justify-content-center">
+    <h4>Ticket(s)</h4>
+  </div>
+  <div class="row justify-content-center">
+    <% if (attachedTickets.length) { %>
+      <select>
+        <% attachedTickets.forEach(function (t) { %>
+        <option value="<%= t.seat %>"><%= t.seat %></option>
+        <% }); %>
+      </select>
+          
     <% } else { %>
-      <h5>No additional destinations may be added</h5>
+      <h5>No tickets have been attached.</h5>
     <% } %>
+  </div>
 
-    <% if (flight.destinations.length) { %>
-        <table>
-          <thead>
-            <tr>
-              <th>Airport</th>
-              <th>Arrival</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% flight.destinations.forEach(function(d) { %>
-              <tr>
-                <td><%= d.airport %></td>
-                <td><%= d.arrival.toLocaleString() %></td>
-                <td>
-                    <form id="delete-destination" 
-                    action="/destinations/<%= d.id %>?_method=DELETE" method="POST">
-                    <button type="submit">X</button>
-                  </form>
-                </td>
-            </tr>
-              <% }); %>
-          </tbody>
-        </table>
-      <% } else { %>
-        <h5>No destinations yet</h5>
-      <% } %>
+  <div class="row justify-content-center">
+    <a href="/flights/<%= flight._id %>/tickets/new">CREATE TICKET</a>
+  </div>
+  
+  <div class="row justify-content-center">
+    <h4>Destination(s)</h4>
+  </div>
 
-      <form id="delete-all-tickets" 
+  <% if (flight.destinations.length) { %>
+    <div class="row text-center justify-content-center border-bottom border-dark">
+      <div class="col-sm">
+        Airport
+      </div>
+      <div class="col-sm">
+        Arrival
+      </div>
+      <div class="col-sm"></div>
+    </div>
+
+      <% flight.destinations.forEach(function(d) { %>
+          <div class="row text-center justify-content-center">
+            <div class="col-sm">
+              <%= d.airport %>
+            </div>
+            <div class="col-sm">
+              <%= d.arrival.toLocaleString() %>
+            </div>
+            <div class="col-sm">
+              <form action="/destinations/<%= d.id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-warning">DELETE</button>
+              </form>
+            </div>
+          </div>
+            
+      <% }); %>
+        <% } else { %>
+          <div class="row text-center justify-content-center">
+            <h5>No destinations have been added.</h5>
+          </div>
+        <% } %>
+              
+        <div class="row justify-content-center">
+          <a href="/flights/<%= flight._id %>/destinations/new"><br>ADD DESTINATION</a>
+        </div>
+</div>
+
+      <form
       action="/flights/<%= flight._id%>/tickets?_method=DELETE" method="POST">
       <button type="submit">Delete all Tickets</button>
+      </form>
 
 <%- include('../partials/footer') %>

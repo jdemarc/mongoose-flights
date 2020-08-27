@@ -24,12 +24,12 @@
                     Arrival
                 </div>                
                 <div class="col-sm">
-                    <input type="datetime-local" name="arrival" value="" autocomplete="off">
+                    <input type="datetime-local" name="arrival" placeholder="2021-10-05T11:30" autocomplete="off">
                 </div>
             </div>
           
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary"> Add Destination</button>
+                <button type="submit" class="btn btn-primary">CONFIRM</button>
                 </form>
             </div>
               <% } else { %>
@@ -38,7 +38,7 @@
                 </div>
               <% } %>
               <div class="row justify-content-center">
-                  <form action="/flights/<%= flight._id %>" method="GET">
+                  <form action="/flights/<%= flight._id= %>" method="GET">
                   <button type="submit" class="btn btn-primary">RETURN</button>
                   </form>
               </div>

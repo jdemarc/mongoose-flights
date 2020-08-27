@@ -2,17 +2,20 @@ const Flight = require('../models/flight');
 const Ticket = require('../models/ticket');
 
 module.exports = {
-    delete: deleteAllTickets,
+    delete: deleteTicket,
     new: newTicket,
     create,
+    return: returnToFlight
 }
 
-function deleteAllTickets(req, res) {
-    
+function deleteTicket(req, res) {
+
+    Ticket.findByIdAndDelete(req.params.id, function(err, ticket) {
+        res.redirect(`/flights/${ticket.flight}`);
+    })
 }
 
 function newTicket (req, res) {
-
     Flight.findById(req.params.id, function(err, flight) {
         Ticket.find({ flight: flight._id }, function (err, tickets) {
                 res.render('tickets/new', {
@@ -34,14 +37,19 @@ function create(req, res) {
             let takenSeats = tickets.map(t => t.seat);
 
             if (takenSeats.includes(req.body.seat)) {
-                res.redirect(`/flights/${req.params.id}/tickets/new`);
+                res.redirect(`/flights/${flight._id}/tickets/new`);
             } else {
                 Ticket.create(req.body, function (err, ticket) {
-                    if (err) res.redirect(`/flights/${req.params.id}/tickets/new`);
                 
-                    res.redirect(`/flights/${req.params.id}/`);
+                    res.redirect(`/flights/${flight._id}/tickets/new/`);
                 });                
             }
         });
+    });
+}
+
+function returnToFlight(req, res) {
+    Flight.findById(req.params.id, function(err, flight) {
+        res.redirect(`/flights/${flight._id}`);
     });
 }

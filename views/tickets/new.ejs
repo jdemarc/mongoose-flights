@@ -24,7 +24,7 @@
     </div>
     <div class="col-sm">
       <form action="/flights/<%= flightId %>/tickets" method="POST">
-        <input name="seat" required pattern="[A-F][1-9]\d?" placeholder="A-Z 10-99">
+        <input name="seat" required pattern="[A-F][1-9]\d?" placeholder="A-F 10-99" autocomplete="off">
     </div>
   </div>
   <div class="row">
@@ -39,6 +39,13 @@
     <button type="submit" class="btn btn-primary">CONFIRM</button>
     </form>
   </div>
+
+  <div class="row justify-content-center">
+      <form action="/flights/<%= flightId %>" method="GET">
+      <button type="submit" class="btn btn-primary">RETURN</button>
+      </form>
+  </div>
+
 </div>
 
 

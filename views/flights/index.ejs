@@ -46,7 +46,7 @@
                   <a href="/flights/<%= f._id %>">DETAILS</a>
                 </div>
                 <div class="col-sm">
-                  <form id="delete-flight" action="/flights/<%= f.id %>?_method=DELETE" method="POST">
+                  <form action="/flights/<%= f.id %>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-warning">DELETE</button>
                 </form>
                 </div>

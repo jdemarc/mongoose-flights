@@ -43,11 +43,12 @@
   </div>
   <div class="row justify-content-center">
     <% if (attachedTickets.length) { %>
-      <select>
-        <% attachedTickets.forEach(function (t) { %>
-        <option value="<%= t.seat %>"><%= t.seat %></option>
-        <% }); %>
-      </select>
+      <% attachedTickets.forEach(function (t) { %>
+        <form action="/tickets/<%= t._id %>?_method=DELETE" method="POST">
+          <button type="button" disabled value="<%= t.id %>"><%= t.seat %></button>
+        <button type="submit" class="btn btn-warning">X</button>
+      </form>
+    <% }); %>
           
     <% } else { %>
       <h5>No tickets have been attached.</h5>

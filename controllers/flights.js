@@ -42,7 +42,6 @@ function show(req, res) {
 
             res.render('flights/show', { flight, title: 'Flight Details', attachedTickets });
         });
-            
     });
 }
 
